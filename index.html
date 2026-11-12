@@ -142,6 +142,11 @@ select option{color:#0F172A}
 input::placeholder,textarea::placeholder{color:#8b9ab0}
 input:hover,select:hover,textarea:hover{border-color:rgba(56,189,248,.6)}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--cyan);background:rgba(56,189,248,.1)}
+.em{display:none;color:#f87171;font-size:.84rem;font-weight:500}
+.fld.err input,.fld.err textarea{border-color:#ef4444;background:rgba(239,68,68,.12);animation:sk .35s}
+.fld.err>.t{color:#f87171}
+.fld.err .em{display:block}
+@keyframes sk{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
 .note{font-size:.82rem;color:#8b9ab0;text-align:center}
 @media (max-width:860px){.box{grid-template-columns:1fr}}
 footer{background:var(--abyss);color:#8b9ab0;padding:2.4rem 0 calc(2.4rem + env(safe-area-inset-bottom,0px));font-size:.9rem}
@@ -240,9 +245,9 @@ footer a:hover{color:var(--cyan)}
 <a href="mailto:madiazc99@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>madiazc99@gmail.com</a>
 </div></div>
 <form id="f" novalidate>
-<label>Nombre<input name="n" required autocomplete="name" placeholder="Tu nombre o el de tu ministerio"></label>
+<label class="fld"><span class="t">Nombre *</span><input name="n" required autocomplete="name" placeholder="Tu nombre o el de tu ministerio"><span class="em" role="alert">Escribe tu nombre para continuar.</span></label>
 <label>Servicio que te interesa<select name="s"><option>Producción musical integral</option><option>Grabación y captura</option><option>Mezcla y masterización</option><option>Contenido audiovisual en vivo</option></select></label>
-<label>Cuéntanos tu proyecto<textarea name="m" rows="3" placeholder="Género, número de canciones, fecha deseada"></textarea></label>
+<label class="fld"><span class="t">Cuéntanos tu proyecto *</span><textarea name="m" rows="3" required placeholder="Género, número de canciones, fecha deseada"></textarea><span class="em" role="alert">Cuéntanos brevemente de qué trata tu proyecto.</span></label>
 <button class="btn btn-p" type="submit"><svg><use href="#wa"/></svg>Enviar por WhatsApp</button>
 <p class="note">Se abrirá WhatsApp con tu mensaje listo para enviar.</p>
 </form>
@@ -302,9 +307,13 @@ for(var k=i+1;k<P.length;k++){var b=P[k],dx=a.x-b.x,dy=a.y-b.y,d=dx*dx+dy*dy;if(
 if(!RM)requestAnimationFrame(dr)}
 dr();
 /* formulario */
-document.getElementById("f").addEventListener("submit",function(ev){ev.preventDefault();var f=ev.target,n=f.n.value.trim();
-if(!n){f.n.focus();f.n.placeholder="Escribe tu nombre para continuar";return}
-var t="Hola MADC Studio, soy "+n+". Me interesa: "+f.s.value+"."+(f.m.value.trim()?" Proyecto: "+f.m.value.trim():"");
+var F=document.getElementById("f");
+function chk(el){var ok=el.value.trim()!=="";el.closest(".fld").classList.toggle("err",!ok);el.setAttribute("aria-invalid",!ok);return ok}
+F.querySelectorAll("[required]").forEach(function(el){el.addEventListener("input",function(){if(el.closest(".fld").classList.contains("err"))chk(el)})});
+F.addEventListener("submit",function(ev){ev.preventDefault();var bad=null;
+F.querySelectorAll("[required]").forEach(function(el){if(!chk(el)&&!bad)bad=el});
+if(bad){bad.focus();return}
+var t="Hola MADC Studio, soy "+F.n.value.trim()+". Me interesa: "+F.s.value+". Proyecto: "+F.m.value.trim();
 window.open(base+encodeURIComponent(t),"_blank","noopener")});
 })();
 </script>
