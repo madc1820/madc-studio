@@ -1,0 +1,17 @@
+MADC STUDIO - Landing page
+==========================
+Contenido:
+  index.html     Pagina principal (HTML + CSS + JS en un solo archivo)
+  img/logo.png   Logo grande
+  img/logo-sm.png Logo pequeno (menu y pie de pagina)
+  favicon.png    Icono de la pestana
+
+Como publicar:
+1. Descomprime el zip y sube TODO su contenido (manteniendo la carpeta img) a la raiz de tu hosting (public_html / www / htdocs).
+2. Abre tu dominio: el archivo principal es index.html.
+
+Datos de contacto (ya configurados):
+  WhatsApp: 573012273763 (busca  var NUM  en index.html para cambiarlo)
+  Correo:   madiazc99@gmail.com (busca  mailto:  para cambiarlo)
+
+Las tipografias (Montserrat e Inter) se cargan desde Google Fonts.

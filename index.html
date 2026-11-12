@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MADC Studio | Sonido con propósito</title>
+<meta name="description" content="Estudio de grabación y producción musical cristiana: producción, grabación, mezcla, masterización y contenido en vivo.">
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--abyss:#0F172A;--blue:#0284C7;--cyan:#38BDF8;--white:#F8FAFC;--graph:#334155;--gold:#F59E0B}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px;background:var(--abyss)}
+body{margin:0;background:var(--white);color:var(--graph);font:400 1rem/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:Montserrat,sans-serif;margin:0;line-height:1.1;color:var(--abyss)}
+h2{font-weight:900;font-size:clamp(1.9rem,4vw,3rem);letter-spacing:-.02em}
+h3{font-weight:700;font-size:1.15rem}
+p{margin:0}a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:3px;border-radius:8px}
+.wrap{width:min(1160px,100% - 2.5rem);margin-inline:auto}
+section{padding:clamp(4.5rem,10vw,8rem) 0;position:relative}
+.dk{background:var(--abyss);color:#b6c2d4}.dk h2,.dk h3{color:var(--white)}
+.grad{background:linear-gradient(100deg,var(--cyan),var(--blue) 45%,var(--cyan));background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sh 5s linear infinite}
+@keyframes sh{to{background-position:200% center}}
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.6rem;font:600 1rem Inter,sans-serif;padding:1rem 1.8rem;border-radius:999px;border:2px solid transparent;cursor:pointer;overflow:hidden;transition:transform .25s,box-shadow .25s,background .25s,color .25s,border-color .25s}
+.btn svg{width:20px;height:20px;flex:none}
+.btn-p{background:linear-gradient(120deg,var(--blue),var(--cyan));color:#fff;box-shadow:0 10px 30px -10px var(--cyan)}
+.btn-p::after{content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);transition:left .6s}
+.btn-p:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 18px 40px -10px var(--cyan)}
+.btn-p:hover::after{left:130%}
+.btn-g{color:var(--white);border-color:rgba(248,250,252,.35)}
+.btn-g:hover{border-color:var(--cyan);color:var(--cyan);transform:translateY(-3px)}
+.btn:active{transform:scale(.98)}
+.pulse{animation:pl 2.4s infinite}
+@keyframes pl{0%{box-shadow:0 0 0 0 rgba(56,189,248,.6)}70%,100%{box-shadow:0 0 0 18px rgba(56,189,248,0)}}
+/* header */
+header{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .3s,backdrop-filter .3s,border-color .3s;border-bottom:1px solid transparent;padding-top:env(safe-area-inset-top,0px)}
+header.s{background:rgba(15,23,42,.88);backdrop-filter:blur(14px);border-color:rgba(248,250,252,.1)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:72px;gap:1rem}
+.bl{display:flex;align-items:center;gap:.7rem;font:800 1.1rem Montserrat;color:var(--white)}
+.bl img{height:40px;width:auto}
+nav{display:flex;align-items:center;gap:1.8rem}
+nav a.l{color:#dbe4f0;font-weight:500;font-size:.95rem;position:relative;padding:.3rem 0;transition:color .2s}
+nav a.l::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--cyan);transition:width .3s}
+nav a.l:hover{color:var(--cyan)}nav a.l:hover::after{width:100%}
+nav .btn{padding:.7rem 1.3rem;font-size:.92rem}
+.burger{display:none;background:none;border:0;width:44px;height:44px;color:var(--white);cursor:pointer;place-items:center}
+.burger svg{width:26px;height:26px}
+@media (max-width:900px){
+.burger{display:grid}
+nav{position:absolute;top:72px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:rgba(15,23,42,.97);padding:.4rem 1.25rem 1.3rem;max-height:0;overflow:hidden;opacity:0;visibility:hidden;transition:.3s}
+nav.open{max-height:520px;opacity:1;visibility:visible}
+nav a.l{padding:.95rem 0;border-bottom:1px solid rgba(248,250,252,.1)}
+nav .btn{margin-top:1rem}}
+/* hero */
+.hero{min-height:100svh;display:grid;place-items:center;text-align:center;padding:110px 0 70px;background:radial-gradient(ellipse at 50% 38%,#12284a,var(--abyss) 65%);color:#b6c2d4;overflow:hidden;isolation:isolate}
+#cv{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+.spot{position:absolute;inset:0;z-index:-1;background:radial-gradient(500px circle at var(--mx,50%) var(--my,40%),rgba(56,189,248,.16),transparent 60%);pointer-events:none}
+.logo-stage{position:relative;width:min(300px,62vw);margin:0 auto;display:grid;place-items:center}
+.ring{position:absolute;left:50%;top:50%;width:100%;aspect-ratio:1;border:1.5px solid var(--cyan);border-radius:50%;translate:-50% -50%;opacity:0;animation:rg 4.5s ease-out infinite}
+.ring:nth-child(2){animation-delay:1.5s}.ring:nth-child(3){animation-delay:3s}
+@keyframes rg{0%{transform:scale(.7);opacity:.7}100%{transform:scale(2.6);opacity:0}}
+.logo-stage::before{content:"";position:absolute;inset:-18%;background:radial-gradient(circle,rgba(56,189,248,.38),transparent 62%);filter:blur(24px);animation:gl 3.5s ease-in-out infinite}
+@keyframes gl{50%{opacity:.45;transform:scale(1.12)}}
+.logo-main{position:relative;width:100%;height:auto;filter:drop-shadow(0 0 28px rgba(56,189,248,.55));animation:li 1.6s cubic-bezier(.2,.8,.2,1) both,fl 6s ease-in-out 1.6s infinite;transition:transform .15s}
+@keyframes li{from{opacity:0;transform:scale(.7) translateY(30px);filter:blur(18px) drop-shadow(0 0 0 transparent)}}
+@keyframes fl{50%{translate:0 -12px}}
+.hero h1{font:900 clamp(1.9rem,5.2vw,3.9rem)/1.08 Montserrat;color:var(--white);margin-top:2.2rem;letter-spacing:-.02em;animation:up 1s .5s both}
+.hero p.lead{max-width:56ch;margin:1.3rem auto 2.2rem;font-size:1.1rem;animation:up 1s .7s both}
+.hero .cta{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;animation:up 1s .9s both}
+@keyframes up{from{opacity:0;transform:translateY(24px)}}
+.cue{position:absolute;bottom:22px;left:50%;translate:-50% 0;width:26px;height:42px;border:2px solid rgba(248,250,252,.4);border-radius:14px}
+.cue::after{content:"";position:absolute;left:50%;top:8px;width:4px;height:8px;margin-left:-2px;border-radius:2px;background:var(--cyan);animation:cu 1.8s infinite}
+@keyframes cu{0%{opacity:1}100%{opacity:0;transform:translateY(16px)}}
+@media (max-height:700px){.logo-stage{width:min(200px,45vw)}.hero h1{margin-top:1.2rem}}
+/* marquee */
+.mq{background:linear-gradient(90deg,var(--blue),var(--cyan));padding:1.05rem 0;overflow:hidden;transform:rotate(-1.2deg);margin:-1.4rem -2rem 0;position:relative;z-index:3;box-shadow:0 14px 40px -16px var(--blue)}
+.mt{display:flex;width:max-content;animation:mq 28s linear infinite}
+.mq:hover .mt{animation-play-state:paused}
+.mt span{font:800 1.05rem Montserrat;color:var(--abyss);white-space:nowrap;padding:0 1.6rem;display:flex;align-items:center;gap:3.2rem}
+.mt span::after{content:"◆";font-size:.7rem;color:var(--white)}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* servicios */
+.head{max-width:680px;margin-bottom:3.4rem}
+.head p{margin-top:1rem;font-size:1.08rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.4rem}
+.card{position:relative;background:var(--abyss);color:#b6c2d4;border-radius:24px;padding:2.2rem 1.7rem;overflow:hidden;transition:transform .2s ease-out,box-shadow .3s;transform-style:preserve-3d}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(320px circle at var(--x,50%) var(--y,0%),rgba(56,189,248,.28),transparent 60%);opacity:0;transition:opacity .3s}
+.card:hover{box-shadow:0 30px 60px -28px var(--blue)}.card:hover::before{opacity:1}
+.card>*{position:relative}
+.card h3{color:var(--white)}
+.ico{width:58px;height:58px;border-radius:16px;background:rgba(56,189,248,.12);color:var(--cyan);display:grid;place-items:center;margin-bottom:1.4rem;transition:background .3s,color .3s,transform .4s}
+.card:hover .ico{background:var(--cyan);color:var(--abyss);transform:rotate(-8deg) scale(1.1)}
+.ico svg{width:28px;height:28px}
+.card p{margin-top:.6rem;font-size:.96rem}
+.card .bn{margin-top:1.1rem;padding-top:1rem;border-top:1px solid rgba(248,250,252,.12);color:var(--cyan);font-weight:600;font-size:.9rem}
+/* estudio */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,5rem);align-items:center}
+.eq{display:flex;align-items:flex-end;gap:5px;height:190px;margin:2rem 0}
+.eq i{flex:1;max-width:14px;border-radius:7px;background:linear-gradient(to top,var(--blue),var(--cyan));height:20%;animation:eq 1.2s ease-in-out infinite alternate}
+@keyframes eq{to{height:100%}}
+.genres{display:flex;flex-wrap:wrap;gap:.6rem}
+.genres span{padding:.5rem 1.1rem;border-radius:999px;border:1px solid rgba(56,189,248,.45);color:var(--cyan);font-size:.9rem;font-weight:500;transition:.25s}
+.genres span:hover{background:var(--cyan);color:var(--abyss);transform:translateY(-3px) rotate(-2deg)}
+.pil{display:grid;gap:1rem}
+.p{display:flex;gap:1.1rem;padding:1.4rem;border:1px solid rgba(248,250,252,.12);border-radius:20px;transition:.3s}
+.p:hover{background:rgba(56,189,248,.08);border-color:var(--cyan);transform:translateX(8px)}
+.p svg{width:30px;height:30px;color:var(--cyan);flex:none;margin-top:2px}
+.p p{font-size:.95rem;margin-top:.3rem}
+@media (max-width:860px){.split{grid-template-columns:1fr}.eq{height:130px}}
+/* números */
+.nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:2rem;text-align:center}
+.num b{display:block;font:900 clamp(3rem,7vw,5rem)/1 Montserrat}
+.num span{display:block;margin-top:.6rem;font-weight:500}
+/* proceso */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.6rem;counter-reset:s;position:relative}
+.step{padding:1.6rem;border-radius:22px;background:#fff;border:1px solid #e2e8f0;transition:.3s}
+.step:hover{transform:translateY(-8px);border-color:var(--cyan);box-shadow:0 24px 44px -26px var(--blue)}
+.step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--abyss);color:var(--cyan);font:800 1.15rem Montserrat;margin-bottom:1rem;transition:.3s}
+.step:hover::before{background:var(--cyan);color:var(--abyss);transform:scale(1.15)}
+.step p{margin-top:.5rem;font-size:.95rem}
+/* manifiesto */
+.mf{text-align:center;overflow:hidden}
+.mf blockquote{margin:0 auto;max-width:900px;font:800 clamp(1.6rem,4.2vw,3rem)/1.2 Montserrat;color:var(--white)}
+.mf::before{content:"";position:absolute;left:50%;top:50%;width:640px;height:640px;translate:-50% -50%;background:radial-gradient(circle,rgba(2,132,199,.35),transparent 65%);animation:gl 6s infinite}
+.mf .wrap{position:relative}
+/* contacto */
+.box{background:var(--abyss);border-radius:34px;padding:clamp(2rem,6vw,4.5rem);display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4rem);position:relative;overflow:hidden}
+.box::after{content:"";position:absolute;width:460px;height:460px;right:-130px;top:-170px;background:radial-gradient(circle,rgba(56,189,248,.35),transparent 65%);pointer-events:none;animation:gl 5s infinite}
+.box>*{position:relative;z-index:1}
+.box h2{color:var(--white)}.box .sub{color:#b6c2d4;margin-top:1rem;font-size:1.05rem}
+.ct{display:grid;gap:.9rem;margin-top:2rem}
+.ct a{display:flex;align-items:center;gap:.9rem;color:var(--white);font-weight:500;padding:.9rem 1.1rem;border:1px solid rgba(248,250,252,.15);border-radius:16px;transition:.25s;word-break:break-all}
+.ct a:hover{border-color:var(--cyan);background:rgba(56,189,248,.08);transform:translateX(6px)}
+.ct svg{width:22px;height:22px;color:var(--cyan);flex:none}
+form{display:grid;gap:1rem;align-content:start}
+label{font-size:.88rem;font-weight:500;color:var(--white);display:grid;gap:.4rem}
+input,select,textarea{width:100%;font:inherit;color:var(--white);background:rgba(248,250,252,.07);border:1px solid rgba(248,250,252,.2);border-radius:12px;padding:.85rem 1rem;transition:.2s}
+select option{color:#0F172A}
+input::placeholder,textarea::placeholder{color:#8b9ab0}
+input:hover,select:hover,textarea:hover{border-color:rgba(56,189,248,.6)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--cyan);background:rgba(56,189,248,.1)}
+.note{font-size:.82rem;color:#8b9ab0;text-align:center}
+@media (max-width:860px){.box{grid-template-columns:1fr}}
+footer{background:var(--abyss);color:#8b9ab0;padding:2.4rem 0 calc(2.4rem + env(safe-area-inset-bottom,0px));font-size:.9rem}
+footer .bar{height:auto;flex-wrap:wrap}
+footer a:hover{color:var(--cyan)}
+.wa{position:fixed;right:1.1rem;bottom:calc(1.1rem + env(safe-area-inset-bottom,0px));z-index:60;width:60px;height:60px;border-radius:50%;background:#25D366;color:#fff;display:grid;place-items:center;box-shadow:0 10px 26px -8px rgba(0,0,0,.5);transition:transform .25s;animation:wp 2.6s infinite}
+@keyframes wp{0%{box-shadow:0 0 0 0 rgba(37,211,102,.6)}70%,100%{box-shadow:0 0 0 20px rgba(37,211,102,0)}}
+.wa:hover{transform:scale(1.12) rotate(-6deg)}.wa svg{width:32px;height:32px}
+.rv{opacity:0;transform:translateY(34px);transition:opacity .8s,transform .8s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}.rv{opacity:1;transform:none}.mt{flex-wrap:wrap;width:auto}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="wa" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.100-4.600-4-4.700-4.200-.1-.2-1.100-1.500-1.100-2.800 0-1.400.7-2 1-2.300.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.900c.1.200.1.400 0 .5l-.4.600c-.1.200-.3.300-.1.600.2.300.8 1.300 1.700 2.100 1.200 1 2.100 1.300 2.400 1.400.3.100.4.100.6-.1l.8-1c.2-.3.4-.2.6-.1l1.800.9c.3.100.5.200.5.300.1.200.1.800-.1 1.400Z"/></symbol>
+</defs></svg>
+
+<header id="hd"><div class="wrap bar">
+<a href="#inicio" class="bl" aria-label="MADC Studio, inicio"><img src="img/logo-sm.png" alt="MADC Studio" width="32" height="40"><span>MADC Studio</span></a>
+<nav id="nav" aria-label="Principal">
+<a class="l" href="#servicios">Servicios</a><a class="l" href="#estudio">El estudio</a><a class="l" href="#proceso">Proceso</a><a class="l" href="#contacto">Contacto</a>
+<a class="btn btn-p wal" href="#contacto"><svg><use href="#wa"/></svg>Agenda tu sesión</a>
+</nav>
+<button class="burger" id="bg" aria-label="Abrir menú" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div></header>
+
+<main id="inicio">
+<section class="hero" id="hero">
+<canvas id="cv" aria-hidden="true"></canvas><div class="spot" aria-hidden="true"></div>
+<div class="wrap">
+<div class="logo-stage" id="ls"><span class="ring"></span><span class="ring"></span><span class="ring"></span>
+<img class="logo-main" id="lg" src="img/logo.png" alt="Logotipo de MADC Studio" width="900" height="1124"></div>
+<h1>Sonido con propósito,<br><span class="grad">excelencia para la eternidad</span></h1>
+<p class="lead">Producción, grabación, mezcla y masterización de música cristiana con estándar internacional. Trae tu canción y llévate una producción que trascienda.</p>
+<div class="cta"><a class="btn btn-p pulse wal" href="#contacto"><svg><use href="#wa"/></svg>Agenda tu sesión</a><a class="btn btn-g" href="#servicios">Conoce los servicios</a></div>
+</div>
+<div class="cue" aria-hidden="true"></div>
+</section>
+
+<div class="mq" aria-hidden="true"><div class="mt" id="mt"></div></div>
+
+<section id="servicios">
+<div class="wrap">
+<div class="head rv"><h2>Todo lo que tu música necesita, <span class="grad">en un solo lugar</span></h2><p>De la maqueta de guitarra y voz al lanzamiento en plataformas. Cuatro servicios que cubren la cadena completa de producción.</p></div>
+<div class="cards">
+<article class="card rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h2M7 8v8M11 4v16M15 8v8M19 10v4"/></svg></div><h3>Producción musical integral</h3><p>Arreglos, composición, secuencias y programación de batería e instrumentos reales para sencillos o álbumes.</p><div class="bn">Una identidad sonora propia</div></article>
+<article class="card rv" style="--d:.1s"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div><h3>Grabación y captura</h3><p>Voces, coros, instrumentos acústicos y banda en vivo con micrófonos de alta gama.</p><div class="bn">Acústica limpia y calidez de señal</div></article>
+<article class="card rv" style="--d:.2s"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 4v16M12 4v16M18 4v16"/><circle cx="6" cy="14" r="2" fill="currentColor"/><circle cx="12" cy="8" r="2" fill="currentColor"/><circle cx="18" cy="15" r="2" fill="currentColor"/></svg></div><h3>Mezcla y masterización</h3><p>Equilibrio de frecuencias, volumen competitivo y claridad comercial con procesos analógicos y digitales.</p><div class="bn">Listo para Spotify, YouTube y radio</div></article>
+<article class="card rv" style="--d:.3s"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3"/></svg></div><h3>Contenido audiovisual en vivo</h3><p>Live sessions en estudio, sesiones de adoración acústica y piezas promocionales para redes.</p><div class="bn">Impacto visual para tu lanzamiento</div></article>
+</div></div>
+</section>
+
+<section id="estudio" class="dk">
+<div class="wrap split">
+<div class="rv">
+<h2>Un santuario creativo con <span class="grad">ingeniería de alta fidelidad</span></h2>
+<div class="eq" id="eq" aria-hidden="true"></div>
+<div class="genres"><span>Worship</span><span>Pop</span><span>Urbano</span><span>Góspel</span><span>Folklore</span><span>Trap cristiano</span></div>
+</div>
+<div class="pil">
+<div class="p rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg><div><h3>Rigor técnico</h3><p>Equipamiento y tratamiento acústico impecables, con mezcla y masterización al estándar de las plataformas.</p></div></div>
+<div class="p rv" style="--d:.1s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-8-5.500-8-11a4.500 4.500 0 0 1 8-2.800A4.500 4.500 0 0 1 20 10c0 5.500-8 11-8 11Z"/></svg><div><h3>Unción y respeto</h3><p>Un ambiente guiado por valores y por la comprensión del propósito ministerial.</p></div></div>
+<div class="p rv" style="--d:.2s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-9 12h7l-1 8 9-12h-7l1-8Z"/></svg><div><h3>Innovación sonora</h3><p>Abiertos a todos los géneros, con una identidad moderna que suena a hoy.</p></div></div>
+</div></div>
+</section>
+
+<section class="dk" style="padding-top:0">
+<div class="wrap nums">
+<div class="num rv"><b class="grad" data-n="4">0</b><span>servicios integrales</span></div>
+<div class="num rv" style="--d:.1s"><b class="grad" data-n="6">0</b><span>géneros musicales</span></div>
+<div class="num rv" style="--d:.2s"><b class="grad" data-n="1">0</b><span>propósito: tu mensaje</span></div>
+</div>
+</section>
+
+<section id="proceso">
+<div class="wrap">
+<div class="head rv"><h2>Así llevamos tu idea <span class="grad">a todas las plataformas</span></h2></div>
+<div class="steps">
+<div class="step rv"><h3>Cuéntanos tu proyecto</h3><p>Escríbenos por WhatsApp y definimos género, objetivo y fechas.</p></div>
+<div class="step rv" style="--d:.1s"><h3>Producción y grabación</h3><p>Armamos los arreglos y capturamos voces e instrumentos en sala.</p></div>
+<div class="step rv" style="--d:.2s"><h3>Mezcla y masterización</h3><p>Ajustamos cada detalle hasta lograr presencia radiofónica.</p></div>
+<div class="step rv" style="--d:.3s"><h3>Lanza tu música</h3><p>Recibes tus archivos listos para publicar y promocionar.</p></div>
+</div></div>
+</section>
+
+<section class="dk mf"><div class="wrap rv"><blockquote>“Cada alabanza lleva un mensaje. <span class="grad">Nosotros le damos el sonido que merece.</span>”</blockquote></div></section>
+
+<section id="contacto" style="padding-top:clamp(4rem,8vw,6rem)">
+<div class="wrap"><div class="box rv">
+<div>
+<h2>¿Listo para grabar tu <span class="grad">próxima canción?</span></h2>
+<p class="sub">Cuéntanos tu proyecto y te respondemos directamente por WhatsApp.</p>
+<div class="ct">
+<a class="wal" href="#"><svg><use href="#wa"/></svg>301 227 3763</a>
+<a href="mailto:madiazc99@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>madiazc99@gmail.com</a>
+</div></div>
+<form id="f" novalidate>
+<label>Nombre<input name="n" required autocomplete="name" placeholder="Tu nombre o el de tu ministerio"></label>
+<label>Servicio que te interesa<select name="s"><option>Producción musical integral</option><option>Grabación y captura</option><option>Mezcla y masterización</option><option>Contenido audiovisual en vivo</option></select></label>
+<label>Cuéntanos tu proyecto<textarea name="m" rows="3" placeholder="Género, número de canciones, fecha deseada"></textarea></label>
+<button class="btn btn-p" type="submit"><svg><use href="#wa"/></svg>Enviar por WhatsApp</button>
+<p class="note">Se abrirá WhatsApp con tu mensaje listo para enviar.</p>
+</form>
+</div></div>
+</section>
+</main>
+
+<footer><div class="wrap bar">
+<span class="bl" style="font-size:1rem"><img src="img/logo-sm.png" alt="" width="26" height="32" style="height:32px">MADC Studio</span>
+<span>© 2026 MADC Studio. Todos los derechos reservados.</span>
+<span><a href="#servicios">Servicios</a> · <a href="#contacto">Contacto</a></span>
+</div></footer>
+<a class="wa wal" href="#" aria-label="Escríbenos por WhatsApp"><svg><use href="#wa"/></svg></a>
+
+<script>
+(function(){
+var NUM="573012273763",base="https://wa.me/"+NUM+"?text=",RM=matchMedia("(prefers-reduced-motion:reduce)").matches;
+var hi=encodeURIComponent("Hola MADC Studio, quiero agendar una sesión.");
+document.querySelectorAll(".wal").forEach(function(a){if(a.getAttribute("href")==="#"){a.href=base+hi;a.target="_blank";a.rel="noopener"}});
+var hd=document.getElementById("hd");
+function sc(){hd.classList.toggle("s",scrollY>40)}sc();addEventListener("scroll",sc,{passive:true});
+var nav=document.getElementById("nav"),bg=document.getElementById("bg");
+bg.onclick=function(){var o=nav.classList.toggle("open");bg.setAttribute("aria-expanded",o)};
+nav.querySelectorAll("a").forEach(function(a){a.onclick=function(){nav.classList.remove("open");bg.setAttribute("aria-expanded","false")}});
+/* marquee */
+var items=["Producción musical","Grabación","Mezcla","Masterización","Live sessions","Worship","Góspel","Urbano cristiano"],h="";
+for(var i=0;i<2;i++)items.forEach(function(t){h+="<span>"+t+"</span>"});
+var mt=document.getElementById("mt");mt.innerHTML=h+h;
+/* ecualizador */
+var eq=document.getElementById("eq"),e="";
+for(var j=0;j<26;j++)e+='<i style="animation-delay:-'+(Math.random()*1.2).toFixed(2)+'s;animation-duration:'+(.7+Math.random()*.9).toFixed(2)+'s"></i>';
+eq.innerHTML=e;
+/* reveal + contadores */
+var io=new IntersectionObserver(function(es){es.forEach(function(x){if(!x.isIntersecting)return;x.target.classList.add("in");io.unobserve(x.target);
+x.target.querySelectorAll("[data-n]").forEach(count)})},{threshold:.15});
+document.querySelectorAll(".rv").forEach(function(el){io.observe(el)});
+function count(el){var t=+el.dataset.n,s=null;function st(ts){s=s||ts;var p=Math.min((ts-s)/1400,1);el.textContent=Math.round(t*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(st)}RM?el.textContent=t:requestAnimationFrame(st)}
+/* tarjetas: luz que sigue el cursor + inclinación */
+document.querySelectorAll(".card").forEach(function(c){
+c.addEventListener("pointermove",function(ev){var r=c.getBoundingClientRect(),x=ev.clientX-r.left,y=ev.clientY-r.top;c.style.setProperty("--x",x+"px");c.style.setProperty("--y",y+"px");
+if(RM||ev.pointerType!=="mouse")return;c.style.transform="perspective(800px) rotateX("+((y/r.height-.5)*-8)+"deg) rotateY("+((x/r.width-.5)*8)+"deg) translateY(-6px)"});
+c.addEventListener("pointerleave",function(){c.style.transform=""})});
+/* hero: parallax del logo + foco de luz + partículas */
+var hero=document.getElementById("hero"),lg=document.getElementById("lg"),ls=document.getElementById("ls");
+hero.addEventListener("pointermove",function(ev){var r=hero.getBoundingClientRect(),x=(ev.clientX-r.left)/r.width,y=(ev.clientY-r.top)/r.height;
+hero.style.setProperty("--mx",x*100+"%");hero.style.setProperty("--my",y*100+"%");
+if(!RM)ls.style.transform="translate("+((x-.5)*-22)+"px,"+((y-.5)*-16)+"px) rotateY("+((x-.5)*10)+"deg)"});
+var cv=document.getElementById("cv"),cx=cv.getContext("2d"),P=[],W,H,dpr=Math.min(devicePixelRatio||1,2),run=true;
+function rs(){W=hero.clientWidth;H=hero.clientHeight;cv.width=W*dpr;cv.height=H*dpr;cx.setTransform(dpr,0,0,dpr,0,0);
+var n=Math.round(Math.min(70,W*H/16000));P=[];for(var i=0;i<n;i++)P.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*1.6+.6})}
+rs();addEventListener("resize",rs);
+new IntersectionObserver(function(es){run=es[0].isIntersecting;if(run&&!RM)dr()}).observe(hero);
+function dr(){if(!run)return;cx.clearRect(0,0,W,H);
+for(var i=0;i<P.length;i++){var a=P[i];a.x+=a.vx;a.y+=a.vy;if(a.x<0||a.x>W)a.vx*=-1;if(a.y<0||a.y>H)a.vy*=-1;
+cx.fillStyle="rgba(56,189,248,.75)";cx.beginPath();cx.arc(a.x,a.y,a.r,0,6.283);cx.fill();
+for(var k=i+1;k<P.length;k++){var b=P[k],dx=a.x-b.x,dy=a.y-b.y,d=dx*dx+dy*dy;if(d<14000){cx.strokeStyle="rgba(56,189,248,"+(.22*(1-d/14000))+")";cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.stroke()}}}
+if(!RM)requestAnimationFrame(dr)}
+dr();
+/* formulario */
+document.getElementById("f").addEventListener("submit",function(ev){ev.preventDefault();var f=ev.target,n=f.n.value.trim();
+if(!n){f.n.focus();f.n.placeholder="Escribe tu nombre para continuar";return}
+var t="Hola MADC Studio, soy "+n+". Me interesa: "+f.s.value+"."+(f.m.value.trim()?" Proyecto: "+f.m.value.trim():"");
+window.open(base+encodeURIComponent(t),"_blank","noopener")});
+})();
+</script>
+</body>
+</html>
